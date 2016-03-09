@@ -5,7 +5,7 @@ exports.show = function (options) {
     return new Promise(function (resolve, reject) {
         try {
             if (options) {
-                var alert = new android.app.AlertDialog.Builder(application.android.currentContext);
+                var alert = new android.support.v7.app.AlertDialog.Builder(application.android.currentContext);
 
                 if (options.message) {
                   alert.setMessage(options.message);
