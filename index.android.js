@@ -49,6 +49,27 @@ exports.show = function (options) {
                 result = {};
                 result.resolve = resolve,
                 result.dialog = alert.show();
+
+              if (options.textColor) {
+                    var textColor = android.graphics.Color.parseColor(options.textColor)
+                    var textViewId = application.android.currentContext.getResources().getIdentifier("android:id/alertTitle", null, null);
+                    if (textViewId) {
+                        var tv = result.dialog.findViewById(textViewId);
+                        if (tv) {
+                            tv.setTextColor(textColor);
+                        }
+                    }
+                }
+                if(options.titleColor)
+                    var titleColor = android.graphics.Color.parseColor(options.titleColor)
+                    var messageTextViewId = application.android.currentContext.getResources().getIdentifier("android:id/message", null, null);
+                    if (messageTextViewId) {
+                        var messageTextView = result.dialog.findViewById(messageTextViewId);
+                        if (messageTextView) {
+                            messageTextView.setTextColor(titleColor);
+                        }
+                    }
+                }                 
             }
         } catch (ex) {
             reject(ex);
