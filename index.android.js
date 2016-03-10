@@ -80,7 +80,7 @@ exports.show = function (options) {
 exports.close = function () {
   if(result){
 
-    if(result.dialog instanceof android.app.AlertDialog){
+    if(result.dialog instanceof android.support.v7.app.AlertDialog){
       result.dialog.cancel();
     }
 
