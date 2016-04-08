@@ -1,5 +1,11 @@
 {
   "name": "nativescript-dialog",
   "version": "0.0.6",
-  "main": "index.js"
+  "main": "index.js",
+	"nativescript": {
+		"id": "org.nativescript.demo",
+		"tns-ios": {
+			"version": "1.7.0"
+		}
+	}  
 }
