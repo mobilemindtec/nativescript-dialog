@@ -88,7 +88,7 @@ exports.show = function (options) {
             reject(ex);
         }
     });
-}
+} 
 
 exports.close = function () {
   if(result){
