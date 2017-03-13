@@ -95,9 +95,8 @@ exports.close = function () {
 
     if(result.dialog instanceof SDCAlertController){
       console.log(result.dialog)
-      console.log(result.dialog.dismiss)
-      console.log(result.dialog.dismissAnimatedCompletion)
-      result.dialog.dismiss();
+      console.log(result.dialog.dismissViewControllerAnimatedCompletion)
+      result.dialog.dismissViewControllerAnimatedCompletion(true, null);
     }
 
     if(result.resolve instanceof Function){
