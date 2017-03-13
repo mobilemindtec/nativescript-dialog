@@ -94,7 +94,7 @@ exports.close = function () {
   if(result){
 
     if(result.dialog instanceof SDCAlertController){
-      result.dialog.dismissAnimatedCompletion(true, null);
+      result.dialog.dismiss();
     }
 
     if(result.resolve instanceof Function){

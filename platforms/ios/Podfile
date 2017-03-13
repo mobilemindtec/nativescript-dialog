@@ -1,1 +1,6 @@
-pod 'SDCAlertView'
+
+source 'https://github.com/CocoaPods/Specs.git'
+
+platform :ios, '8.0'
+
+pod 'SDCAlertView', :git => "git@github.com:mobilemindtec/SDCAlertView.git"
