@@ -88,13 +88,16 @@ exports.show = function (options) {
             reject(ex);
         }
     });
-} 
+}
 
 exports.close = function () {
   if(result){
 
     if(result.dialog instanceof SDCAlertController){
-      result.dialog.dismissAnimatedCompletion(true, null);
+      console.log(result.dialog)
+      console.log(result.dialog.dismiss)
+      console.log(result.dialog.dismissAnimatedCompletion)
+      result.dialog.dismiss();
     }
 
     if(result.resolve instanceof Function){
