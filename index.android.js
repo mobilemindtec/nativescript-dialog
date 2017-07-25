@@ -1,4 +1,7 @@
 var application = require("application");
+var colorModule = require("color");
+var Color = colorModule.Color;
+
 var result;
 
 exports.show = function (options) {
@@ -30,20 +33,20 @@ exports.show = function (options) {
 
                 if (options.neutralButtonText) {
                     alert.setNeutralButton(options.neutralButtonText, new android.content.DialogInterface.OnClickListener({
-          						onClick: function (dialog, id) {
-          							dialog.cancel();
-          							resolve(undefined);
-          						}
-          					}));
+                      onClick: function (dialog, id) {
+                        dialog.cancel();
+                        resolve(undefined);
+                      }
+                    }));
                 }
 
                 if (options.okButtonText) {
                     alert.setPositiveButton(options.okButtonText, new android.content.DialogInterface.OnClickListener({
-          						onClick: function (dialog, id) {
-          							dialog.cancel();
-          							resolve(true);
-          						}
-          					}));
+                      onClick: function (dialog, id) {
+                        dialog.cancel();
+                        resolve(true);
+                      }
+                    }));
                 }
 
                 result = {};
@@ -51,22 +54,22 @@ exports.show = function (options) {
                 result.dialog = alert.show();
 
               if (options.textColor) {
-                var textColor = android.graphics.Color.parseColor(options.textColor)
+                var textColor = new Color(options.textColor)
                 var textViewId = application.android.currentContext.getResources().getIdentifier("android:id/alertTitle", null, null);
                 if (textViewId) {
                   var tv = result.dialog.findViewById(textViewId);
                   if (tv) {
-                      tv.setTextColor(textColor);
+                      tv.setTextColor(textColor.android);
                   }
                 }
               }
               if(options.titleColor){
-                var titleColor = android.graphics.Color.parseColor(options.titleColor)
+                var titleColor = new Color(options.titleColor)
                 var messageTextViewId = application.android.currentContext.getResources().getIdentifier("android:id/message", null, null);
                 if (messageTextViewId) {
                   var messageTextView = result.dialog.findViewById(messageTextViewId);
                   if (messageTextView) {
-                      messageTextView.setTextColor(titleColor);
+                      messageTextView.setTextColor(titleColor.android);
                   }
                 }
               }                 

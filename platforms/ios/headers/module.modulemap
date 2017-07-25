@@ -1,0 +1,4 @@
+module NativeScriptDialog {
+  umbrella "../../../../../platforms/ios/Pods/Headers/Public"
+  export *
+}

@@ -1,4 +1,6 @@
 var dialogsCommon = require("ui/dialogs/dialogs-common");
+var colorModule = require("color");
+var Color = colorModule.Color;
 
 var result;
 
@@ -6,7 +8,7 @@ exports.show = function (options) {
     return new Promise(function (resolve, reject) {
         try {
             if (options) {
-                var alert = SDCAlertController.alloc().initWithTitleMessagePreferredStyle(options.title || "", options.message || "", AlertControllerStyle.Alert);
+                var alert = SDCAlertController.alloc().initWithTitleMessagePreferredStyle(options.title || "", options.message || "", UIAlertControllerStyleAlert);
 
                 if (options.nativeView instanceof UIView) {
                     alert.contentView.addSubview(options.nativeView);
@@ -35,25 +37,38 @@ exports.show = function (options) {
 
                 if (options.cancelButtonText) {
                     alert.addAction(SDCAlertAction.alloc().initWithTitleStyleHandler(options.cancelButtonText,
-                        AlertActionStyle.Default, function (args) {
+                        UIAlertActionStyleDefault, function (args) {
                             resolve(false);
                         }));
                 }
 
                 if (options.neutralButtonText) {
                     alert.addAction(SDCAlertAction.alloc().initWithTitleStyleHandler(options.neutralButtonText,
-                        AlertActionStyle.Default, function (args) {
+                        UIAlertActionStyleDefault, function (args) {
                             resolve(undefined);
                         }));
                 }
 
                 if (options.okButtonText) {
                     alert.addAction(SDCAlertAction.alloc().initWithTitleStyleHandler(options.okButtonText,
-                        AlertActionStyle.Default, function (args) {
+                        UIAlertActionStyleDefault, function (args) {
                             resolve(true);
                         }));
                 }
 
+                if(options.titleColor){
+                  var color = new Color(options.titleColor);
+                  var attrStr = alert.attributedTitle.mutableCopy()
+                  attrStr.addAttributeValueRange(NSForegroundColorAttributeName, color.ios, NSMakeRange(0, attrStr.string.length));
+                  alert.attributedTitle = attrStr
+                }
+
+                if(options.textColor){
+                  var color = new Color(options.textColor);
+                  var attrStr = alert.attributedMessage.mutableCopy()
+                  attrStr.addAttributeValueRange(NSForegroundColorAttributeName, color.ios, NSMakeRange(0, attrStr.string.length));
+                  alert.attributedMessage = attrStr
+                }
 
                 result = {};
                 result.resolve = resolve,
@@ -79,7 +94,7 @@ exports.close = function () {
   if(result){
 
     if(result.dialog instanceof SDCAlertController){
-      result.dialog.dismissAnimatedCompletion(true, null);
+      result.dialog.dismissViewControllerAnimatedCompletion(true, null);
     }
 
     if(result.resolve instanceof Function){

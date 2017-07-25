@@ -1,1 +1,2 @@
-pod 'SDCAlertView'
+
+pod 'SDCAlertView', :git => "git@github.com:mobilemindtec/SDCAlertView.git"
